@@ -16,8 +16,10 @@
 #include <zcmdsh/debug_zcmdsh.h>
 #include "debug_sdplane.h"
 
+#if 0
 #include "l3fwd.h"
 #include "l2fwd_export.h"
+#endif
 
 #include "sdplane.h"
 #include "tap_handler.h"
@@ -101,16 +103,23 @@ CLI_COMMAND2 (set_worker,
     func = lcore_workers[lcore_id].func;
   else if (! strcmp (argv[4], "none"))
     func = NULL;
+#if 0
   else if (! strcmp (argv[4], "l2fwd"))
     func = l2fwd_launch_one_lcore;
+#endif
   else if (! strcmp (argv[4], "tap-handler"))
     func = tap_handler;
   else if (! strcmp (argv[4], "l2-repeater"))
     func = l2_repeater;
   else if (! strcmp (argv[4], "nettlp-thread"))
     func = nettlp_thread;
+#if 0
   else /* if (! strcmp (argv[4], "l3fwd")) */
     func = lpm_main_loop;
+#else
+  else
+    func = NULL;
+#endif
 
   if (lcore_workers[lcore_id].func == lthread_main)
     {
@@ -120,11 +129,14 @@ CLI_COMMAND2 (set_worker,
     }
 
   char *func_name;
+#if 0
   if (func == lpm_main_loop)
     func_name = "l3fwd-lpm";
   else if (func == l2fwd_launch_one_lcore)
     func_name = "l2fwd";
   else if (func == lthread_main)
+#endif
+  if (func == lthread_main)
     func_name = "lthread_main";
   else if (func == tap_handler)
     func_name = "tap-handler";

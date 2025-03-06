@@ -26,8 +26,11 @@
 
 #include "sdplane.h"
 #include "thread_info.h"
+
+#if 0
 #include "l2fwd_cmd.h"
 #include "l3fwd_cmd.h"
+#endif
 
 #include "vty_server.h"
 #include "vty_shell.h"
@@ -192,8 +195,8 @@ vty_shell (void *arg)
   INSTALL_COMMAND2 (shell->cmdset, debug_sdplane);
   INSTALL_COMMAND2 (shell->cmdset, show_debug_sdplane);
 
-  l2fwd_cmd_init (shell->cmdset);
-  l3fwd_cmd_init (shell->cmdset);
+  //l2fwd_cmd_init (shell->cmdset);
+  //l3fwd_cmd_init (shell->cmdset);
   sdplane_cmd_init (shell->cmdset);
 
   // termio_init ();

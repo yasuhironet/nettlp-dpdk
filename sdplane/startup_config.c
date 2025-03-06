@@ -16,9 +16,12 @@
 // #include <zcmdsh/shell_fselect.h>
 #include <zcmdsh/log_cmd.h>
 
+#if 0
 #include "l3fwd.h"
 #include "l3fwd_cmd.h"
 #include "l2fwd_cmd.h"
+#endif
+
 #include "sdplane.h"
 #include "debug_sdplane.h"
 
@@ -41,11 +44,11 @@ startup_config (__rte_unused void *dummy)
   INSTALL_COMMAND2 (shell->cmdset, debug_sdplane);
   // INSTALL_COMMAND2 (shell->cmdset, show_debug_sdplane);
 
-  INSTALL_COMMAND2 (shell->cmdset, l2fwd_init);
+  //INSTALL_COMMAND2 (shell->cmdset, l2fwd_init);
 
   log_cmd_init (shell->cmdset);
-  l2fwd_cmd_init (shell->cmdset);
-  l3fwd_cmd_init (shell->cmdset);
+  //l2fwd_cmd_init (shell->cmdset);
+  //l3fwd_cmd_init (shell->cmdset);
   sdplane_cmd_init (shell->cmdset);
 
   // termio_init ();

@@ -11,8 +11,10 @@
 #include <zcmdsh/command_shell.h>
 #include <zcmdsh/debug_cmd.h>
 
+#if 0
 #include "l3fwd.h"
 #include "l2fwd_export.h"
+#endif
 
 #include "sdplane.h"
 #include "sdplane_version.h"
@@ -246,11 +248,32 @@ sdplane_cmd_init (struct command_set *cmdset)
   nettlp_cmd_init (cmdset);
 }
 
+struct rte_mempool *l2fwd_pktmbuf_pool = NULL;
+
+volatile bool force_quit;
+
+struct lcore_queue_conf lcore_queue_conf[RTE_MAX_LCORE];
+
 void
 sdplane_init ()
 {
   int lcore_id;
   debug_sdplane_cmd_init ();
   thread_info_init ();
+
+  uint16_t nb_ports;
+  uint16_t nb_rxd = 1024;
+  uint16_t nb_txd = 1024;
+  uint16_t nb_lcores;
+  unsigned int nb_mbufs;
+
+  nb_lcores = rte_lcore_count();
+  nb_ports = rte_eth_dev_count_avail();
+  nb_mbufs = RTE_MAX(nb_ports * (nb_rxd + nb_txd + MAX_PKT_BURST +
+                nb_lcores * MEMPOOL_CACHE_SIZE), 8192U);
+
+  l2fwd_pktmbuf_pool = rte_pktmbuf_pool_create("mbuf_pool", nb_mbufs,
+          MEMPOOL_CACHE_SIZE, 0, RTE_MBUF_DEFAULT_BUF_SIZE,
+          rte_socket_id());
 }
 

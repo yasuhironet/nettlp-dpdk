@@ -126,4 +126,19 @@ struct stream_msg_qconf {
   struct sdplane_queue_conf qconf[RTE_MAX_LCORE];
 };
 
+#define MAX_PKT_BURST     32
+extern struct rte_mempool *l2fwd_pktmbuf_pool;
+
+#define RX_DESC_DEFAULT 1024
+#define TX_DESC_DEFAULT 1024
+#define MEMPOOL_CACHE_SIZE 256
+#define BURST_TX_DRAIN_US  100 /* TX drain every ~100us */
+
+struct lcore_queue_conf
+{
+  unsigned n_rx_port;
+  unsigned rx_port_list[MAX_RX_QUEUE_PER_LCORE];
+} __rte_cache_aligned;
+extern struct lcore_queue_conf lcore_queue_conf[RTE_MAX_LCORE];
+
 #endif /*__SOFT_DPLANE_H__*/

@@ -27,7 +27,8 @@
 #include <zcmdsh/debug_zcmdsh.h>
 #include "debug_sdplane.h"
 
-#include "l2fwd_export.h"
+//#include "l2fwd_export.h"
+
 #include "sdplane.h"
 #include "tap_handler.h"
 
@@ -95,8 +96,10 @@ l2_repeat (struct rte_mbuf *m, unsigned rx_portid)
           /* send the packet-copy */
           tx_queueid = lcore_id;
           sent = rte_eth_tx_buffer (tx_portid, tx_queueid, buffer, c);
+#if 0
           if (sent)
             port_statistics[tx_portid].tx += sent;
+#endif
           DEBUG_SDPLANE_LOG (L2_REPEATER,
                              "lcore[%d]: m: %p c: %p port %d -> %d",
                              lcore_id, m, c, rx_portid, tx_portid);
@@ -131,10 +134,12 @@ l2_repeater_tx_flush ()
       sent = 0;
       if (buffer)
         sent = rte_eth_tx_buffer_flush (portid, lcore_id, buffer);
+#if 0
       if (sent)
         {
           port_statistics[portid].tx += sent;
         }
+#endif
     }
 }
 
@@ -162,7 +167,7 @@ l2_repeater_rx_burst ()
       if (unlikely (nb_rx == 0))
         continue;
 
-      port_statistics[portid].rx += nb_rx;
+      //port_statistics[portid].rx += nb_rx;
 
       for (j = 0; j < nb_rx; j++)
         {

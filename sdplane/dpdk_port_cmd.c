@@ -12,8 +12,10 @@
 #include <zcmdsh/command_shell.h>
 #include <zcmdsh/debug_cmd.h>
 
+#if 0
 #include "l3fwd.h"
 #include "l2fwd_export.h"
+#endif
 
 #include "sdplane.h"
 #include "stat_collector.h"

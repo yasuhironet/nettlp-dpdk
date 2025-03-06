@@ -22,7 +22,7 @@
 #include "sdplane.h"
 #include "thread_info.h"
 
-#include "l2fwd_export.h"
+//#include "l2fwd_export.h"
 
 #include "internal_message.h"
 

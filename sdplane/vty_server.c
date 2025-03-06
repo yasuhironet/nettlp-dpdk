@@ -19,8 +19,10 @@
 
 #include "sdplane.h"
 
+#if 0
 #include "l3fwd_cmd.h"
 #include "l2fwd_cmd.h"
+#endif
 
 #include "vty_server.h"
 #include "vty_shell.h"

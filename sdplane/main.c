@@ -12,7 +12,7 @@
 #include <zcmdsh/debug_category.h>
 #include <zcmdsh/debug_zcmdsh.h>
 
-#include "l3fwd.h"
+//#include "l3fwd.h"
 
 #include "sdplane.h"
 #include "thread_info.h"

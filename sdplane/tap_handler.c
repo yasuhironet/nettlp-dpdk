@@ -23,12 +23,14 @@
 #include <zcmdsh/debug_zcmdsh.h>
 #include "debug_sdplane.h"
 
+#if 0
 #include "l3fwd.h"
 #include "l3fwd_event.h"
 #include "l3fwd_route.h"
 
 #include "l2fwd_export.h"
 #include "l2fwd_cmd.h"
+#endif
 
 #include "sdplane.h"
 #include "thread_info.h"

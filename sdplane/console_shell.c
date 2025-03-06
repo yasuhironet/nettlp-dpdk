@@ -48,6 +48,7 @@
 // #include <zcmdsh/shell_fselect.h>
 #include <zcmdsh/debug_zcmdsh.h>
 
+#if 0
 #include "l3fwd.h"
 #include "l3fwd_event.h"
 #include "l3fwd_route.h"
@@ -55,6 +56,7 @@
 
 #include "l2fwd_export.h"
 #include "l2fwd_cmd.h"
+#endif
 
 #include "sdplane.h"
 #include "tap_handler.h"
@@ -126,8 +128,8 @@ console_shell (void *arg)
   shell_install (shell, 0x7f, shell_keyfunc_delete_char_advanced);
 
   log_cmd_init (shell->cmdset);
-  l2fwd_cmd_init (shell->cmdset);
-  l3fwd_cmd_init (shell->cmdset);
+  //l2fwd_cmd_init (shell->cmdset);
+  //l3fwd_cmd_init (shell->cmdset);
   sdplane_cmd_init (shell->cmdset);
 
   termio_init ();
