@@ -1,0 +1,5 @@
+ac6a98db6eaaff76d1e0914bfb443acd  usr/lib/systemd/system/sdplane.service
+40dfc20cca1ec527595e799238b01d53  usr/sbin/sdplane
+2dbd941c4db656b3cc63d0b2f75b3dd8  usr/share/doc/sdplane/README.Debian
+e140354c4a0cd9d341113516a8c12c60  usr/share/doc/sdplane/changelog.Debian.gz
+dd76c9672b4e12e11cd58b3d4639a711  usr/share/doc/sdplane/copyright

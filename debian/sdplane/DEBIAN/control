@@ -1,0 +1,12 @@
+Package: sdplane
+Version: 0.1.1-93
+Architecture: amd64
+Maintainer: Yasuhiro Ohara <yasu1976@gmail.com>
+Installed-Size: 321
+Depends: libc6 (>= 2.34), librte-eal24 (>= 23.11), librte-ethdev24 (>= 23.11), librte-hash24 (>= 23.11), librte-log24 (>= 23.11), librte-lpm24 (>= 23.11), librte-mbuf24 (>= 23.11), librte-mempool24 (>= 23.11), librte-net24 (>= 23.11), librte-ring24 (>= 23.11), liburcu8t64 (>= 0.13.1-1), zcmdsh (>= 0.3.36)
+Section: net
+Priority: optional
+Multi-Arch: foreign
+Homepage: http://www.yasuhironet.net/
+Description: DPDK software data-plane,
+  with interactive command shell.

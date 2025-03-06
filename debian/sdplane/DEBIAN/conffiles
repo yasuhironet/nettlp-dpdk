@@ -1,0 +1,5 @@
+/etc/sdplane/60-netplan-sdplane.yaml
+/etc/sdplane/iptables-rules.v4
+/etc/sdplane/iptables-rules.v6
+/etc/sdplane/sdplane.conf.sample
+/etc/sdplane/sshd_config

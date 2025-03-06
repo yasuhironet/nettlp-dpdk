@@ -1,0 +1,3 @@
+shlibs:Depends=libc6 (>= 2.34), librte-eal24 (>= 23.11), librte-ethdev24 (>= 23.11), librte-hash24 (>= 23.11), librte-log24 (>= 23.11), librte-lpm24 (>= 23.11), librte-mbuf24 (>= 23.11), librte-mempool24 (>= 23.11), librte-net24 (>= 23.11), librte-ring24 (>= 23.11), liburcu8t64 (>= 0.13.1-1), zcmdsh (>= 0.3.36)
+misc:Depends=
+misc:Pre-Depends=
