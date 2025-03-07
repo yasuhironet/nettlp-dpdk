@@ -53,3 +53,5 @@ Makefile.in
 /debian/zcmdsh.substvars
 /debian/changelog
 
+/sdplane/sdplane
+
