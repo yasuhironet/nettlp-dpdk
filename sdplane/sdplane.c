@@ -2,6 +2,7 @@
 
 #include <rte_ethdev.h>
 #include <rte_bus_pci.h>
+#include <rte_errno.h>
 
 #include <zcmdsh/debug.h>
 #include <zcmdsh/termio.h>
@@ -79,6 +80,14 @@ CLI_COMMAND2 (set_l3fwd_argv,
 
   for (i = 0; i < l3fwd_argc; i++)
     fprintf (shell->terminal, "l3fwd_argv[%d]: %s\n", i, l3fwd_argv[i]);
+
+#if 0
+  int ret;
+  ret = rte_eal_init (l3fwd_argc, l3fwd_argv);
+  if (ret < 0)
+    fprintf (shell->terminal, "rte_eal_init(): return %d: %d %s%s",
+             ret, rte_errno, rte_strerror (rte_errno), shell->NL);
+#endif
 }
 
 CLI_COMMAND2 (show_loop_count,
@@ -271,6 +280,14 @@ sdplane_init ()
   nb_ports = rte_eth_dev_count_avail();
   nb_mbufs = RTE_MAX(nb_ports * (nb_rxd + nb_txd + MAX_PKT_BURST +
                 nb_lcores * MEMPOOL_CACHE_SIZE), 8192U);
+
+  int ret;
+  int argc = 3;
+  char *argv[] = { "sdplane", "-c", "0xf", 0 };
+
+  ret = rte_eal_init (argc, argv);
+  if (ret < 0)
+    fprintf (stderr, "rte_eal_init(): error: %d\n", rte_errno);
 
   l2fwd_pktmbuf_pool = rte_pktmbuf_pool_create("mbuf_pool", nb_mbufs,
           MEMPOOL_CACHE_SIZE, 0, RTE_MBUF_DEFAULT_BUF_SIZE,
