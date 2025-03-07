@@ -1,13 +1,8 @@
 # soft-dplane
 
 ```
-% aclocal
-% autoheader
-% automake -a -c
-% autoconf
-% mkdir build
-% cd build
-% ../configure
+% sh autogen.sh
+% CFLAGS="-g -O0" sh configure
 % make
 
 /* run in foreground */
