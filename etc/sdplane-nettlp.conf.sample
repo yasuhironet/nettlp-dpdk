@@ -10,6 +10,10 @@ debug sdplane rib
 #debug sdplane vswitch
 #debug sdplane internal-message
 debug sdplane nettlp
+#debug sdplane packet
+
+set tap capture ifname capture0
+set tap capture persistent
 
 set l3fwd argv -c 0xf -- -p 0x3 --config="(0,0,1),(1,0,2)"
 l3fwd init
@@ -26,33 +30,52 @@ stop port all
 l2fwd init
 stop port all
 
+set port all nrxdesc 2048
+
 #set port 0 dev-configure 2 4
 #set port 1 dev-configure 1 4
 
-set thread 1 port 0 queue 0
-set thread 1 port 1 queue 0
+#set thread 1 port 0 queue 0
+#set thread 1 port 1 queue 0
+set thread 2 port 1 queue 0
+set thread 2 port 0 queue 0
 
 set worker lcore 1 l2-repeater
-set worker lcore 2 l2-repeater
+#set worker lcore 2 l2-repeater
 set worker lcore 2 nettlp-thread
 
 start worker lcore all
 set port all promiscuous enable
 start port all
 
-set nettlp ether local-addr aa:bb:cc:dd:ee:ff
-set nettlp ether remote-addr 11:22:33:44:55:66
-set nettlp ipv4 local-addr 11.11.11.11
-set nettlp ipv4 remote-addr 11.11.11.12
-set nettlp udp src-port 1000
-set nettlp udp dst-port 0x3000
-set nettlp bus-number 0x3f device-number 0xab
-set nettlp pci-tag 128
 set nettlp tx-portid 1
-set nettlp memory-address 0xaaaabbbb
+set nettlp ether local-addr b8:3f:d2:14:7c:eb
+set nettlp ether remote-addr 00:11:22:33:44:55
+##set nettlp ipv4 local-addr 10.10.10.1
+##set nettlp ipv4 remote-addr 10.10.10.2
+set nettlp ipv4 local-addr 192.168.10.3
+set nettlp ipv4 remote-addr 192.168.10.1
+
+# https://haeena.dev/nettlp/setup.html
+# set nettlp tx-portid 1
+# set nettlp ether local-addr b8:3f:d2:14:7c:eb
+# set nettlp ether remote-addr 00:11:22:33:44:55
+# set nettlp ipv4 local-addr 192.168.10.3
+# set nettlp ipv4 remote-addr 192.168.10.1
+
+set nettlp udp src-port 0x3000
+set nettlp udp dst-port 0x3000
+set nettlp bus-number 0x1a device-number 0x00
+set nettlp pci-tag 128
+#set nettlp memory-address 0xaaaabbbb
+#set nettlp memory-address 0x10276a88e0
+set nettlp memory-address 0x103a488f30
 #set nettlp size 16
 set nettlp max-payload-size 4096
-set nettlp payload-string A
+set nettlp payload-string TEST=STRING
 
-sleep 3
-update port link-status
+set nettlp psmem-addr 0x90000000
+set nettlp psmem-size 256M
+
+sleep 5
+update port status
